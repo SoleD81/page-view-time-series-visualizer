@@ -89,10 +89,28 @@ def draw_box_plot():
     df_box['year'] = [d.year for d in df_box.date]
     df_box['month'] = [d.strftime('%b') for d in df_box.date]
 
+    mes_orden = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    df_box['month'] = df_box.month.astype('category').cat.set_categories(mes_orden, ordered = True)
+
+
     # Draw box plots (using Seaborn)
+    fig, axes = plt.subplots(1, 2, figsize=(20,5))
+
+    axes[0].set_title('Year-wise Box Plot (Trend)')
+    axes[1].set_title('Month-wise Box Plot (Seasonality)')
+
+    sns.boxplot(ax = axes[0], data = df_box, x = 'year', y = 'value', palette="tab10", hue = "year", legend = False)
+    sns.boxplot(ax = axes[1], data = df_box, x = 'month', y = 'value', palette="husl", hue = "month", hue_order = mes_orden, legend = False)
 
 
-
+    #Asignándole etiquetas para los ejes X e Y de cada uno de los AXES (SubPlots)
+    #Los TICKS: rango de inicio y final (de 0 a 220000), con intervalo cada 20000
+    axes[0].set_xlabel("Year")
+    axes[0].set_ylabel("Page Views")
+    axes[0].set_yticks(range(0, 220000, 20000))
+    axes[1].set_xlabel("Month")
+    axes[1].set_ylabel("Page Views")
+    axes[1].set_yticks(range(0, 220000, 20000))
 
 
     # Save image and return fig (don't change this part)

@@ -20,8 +20,6 @@ def draw_line_plot():
     ax.tick_params(axis = 'x', labelrotation = 0)
     ax.get_legend().remove()
 
-    fig = plt.show()
-
     # Save image and return fig (don't change this part)
     fig.savefig('line_plot.png')
     return fig
@@ -73,8 +71,6 @@ def draw_bar_plot():
     df_bar_plot.set_xlabel("Years")
     df_bar_plot.set_ylabel("Average Page Views")
 
-
-    fig = plt.show()
 
     # Save image and return fig (don't change this part)
     fig.savefig('bar_plot.png')
